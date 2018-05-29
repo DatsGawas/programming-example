@@ -5,6 +5,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
 import {LoginComponent} from "./components/login.component";
 import {PageNotFoundComponent} from "./components/pagenotfound.component";
+import {HomeAuthService} from "./auth-service/home.auth.service";
 
 const routeConst: Routes = [
   {
@@ -14,7 +15,7 @@ const routeConst: Routes = [
     path: 'login', component: LoginComponent
   },
   {
-    path: 'home', loadChildren: './modules/home.module#HomeModule'
+    path: 'home', data: ['dats', 'dats'], canLoad: [HomeAuthService], loadChildren: './modules/home.module#HomeModule'
   },
   {
     path: '**', component: PageNotFoundComponent
@@ -25,7 +26,7 @@ const routeConst: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routeConst)],
   exports: [RouterModule],
-  providers: [],
+  providers: [HomeAuthService],
 })
 export class RouteConfigModule {
 }

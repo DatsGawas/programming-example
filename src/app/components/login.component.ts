@@ -5,6 +5,7 @@
 import {Component, OnInit} from '@angular/core';
 import {LoginModel} from "../models/login.model";
 import {Router} from "@angular/router";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'login',
@@ -66,7 +67,7 @@ import {Router} from "@angular/router";
 
 export class LoginComponent implements OnInit {
   loginModel: LoginModel;
-  constructor(private _route: Router) {
+  constructor(private _route: Router, private _cookieService: CookieService) {
     this.loginModel = new LoginModel();
   }
   ngOnInit() {
@@ -74,6 +75,8 @@ export class LoginComponent implements OnInit {
 
   onLoginClick() {
     if (this.loginModel.emailId != '' && this.loginModel.password != '') {
+      this._cookieService.set('emailId', this.loginModel.emailId, 0.00138889);
+      this._cookieService.set('password', this.loginModel.password, 0.00138889);
       this._route.navigate(['home']);
     }
   }
