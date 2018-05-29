@@ -14,6 +14,9 @@ const routeConst: Routes = [
     path: 'login', component: LoginComponent
   },
   {
+    path: 'home', loadChildren: './modules/home.module#HomeModule'
+  },
+  {
     path: '**', component: PageNotFoundComponent
   }
 ];
